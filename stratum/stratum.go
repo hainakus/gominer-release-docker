@@ -470,7 +470,7 @@ func (s *Stratum) Subscribe() error {
 	msg := StratumMsg{
 		Method: "mining.subscribe",
 		ID:     s.ID,
-		Params: []string{"/" + s.cfg.User + "/" + s.cfg.Version},
+		Params: []string{"decred-gominer/" + s.cfg.Version},
 	}
 	s.subID = msg.ID.(uint64)
 	s.ID++
