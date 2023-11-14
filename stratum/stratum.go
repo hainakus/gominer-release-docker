@@ -377,7 +377,7 @@ func (s *Stratum) handleStratumMsg(resp interface{}) {
 		msg := StratumMsg{
 			Method: nResp.Method,
 			ID:     nResp.ID,
-			Params: []string{"decred-gominer/" + s.cfg.User + s.cfg.Version},
+			Params: []string{"decred-gominer/" + s.cfg.Version},
 		}
 		m, err := json.Marshal(msg)
 		if err != nil {
