@@ -216,7 +216,7 @@ func StratumConn(pool, user, pass, proxy, proxyUser, proxyPass, version string,
 	stratum.authID = 2
 
 	// Target for share is 1 unless we hear otherwise.
-	stratum.Diff = 1
+	stratum.Diff = 4
 	stratum.Target, err = util.DiffToTarget(stratum.Diff, chainParams.PowLimit)
 	if err != nil {
 		return nil, err
@@ -377,7 +377,7 @@ func (s *Stratum) handleStratumMsg(resp interface{}) {
 		msg := StratumMsg{
 			Method: nResp.Method,
 			ID:     nResp.ID,
-			Params: []string{"decred-gominer/" + s.cfg.Version},
+			Params: []string{"decred-gominer/" + s.cfg.User + s.cfg.Version},
 		}
 		m, err := json.Marshal(msg)
 		if err != nil {
@@ -470,7 +470,7 @@ func (s *Stratum) Subscribe() error {
 	msg := StratumMsg{
 		Method: "mining.subscribe",
 		ID:     s.ID,
-		Params: []string{"decred-gominer/" + s.cfg.Version},
+		Params: []string{"decred-gominer/" + s.cfg.User + s.cfg.Version},
 	}
 	s.subID = msg.ID.(uint64)
 	s.ID++
